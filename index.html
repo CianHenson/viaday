@@ -112,5 +112,16 @@
   document.getElementById('openLetter').addEventListener('click',()=>{document.getElementById('letterWrap').classList.add('show');document.getElementById('openLetter').textContent='Your letter is open 💗';document.getElementById('letterWrap').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});});
   document.getElementById('heartsButton').addEventListener('click',()=>{for(let i=0;i<18;i++){const h=document.createElement('span');h.className='heart';h.textContent='♥';h.style.left=(20+Math.random()*60)+'%';h.style.bottom='5%';h.style.fontSize=(20+Math.random()*24)+'px';h.style.animationDuration=(2.5+Math.random()*2)+'s';sparkleField.appendChild(h);setTimeout(()=>h.remove(),5000);}});
 </script>
+<audio id="song" src="song.mp3" preload="auto" loop></audio>
+<script>
+  // Plays the chorus when the letter is opened (browsers need a click first).
+  // Set CHORUS_START to the second where the chorus begins in song.mp3.
+  const CHORUS_START = 60;
+  const song = document.getElementById('song');
+  document.getElementById('openLetter').addEventListener('click', () => {
+    song.currentTime = CHORUS_START;
+    song.play().catch(() => {});
+  });
+</script>
 </body>
 </html>
